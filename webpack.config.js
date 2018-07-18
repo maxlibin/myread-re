@@ -11,4 +11,30 @@ module.exports = {
     publicPath: outputDir,
     filename: 'Index.js',
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.svg/,
+        use: {
+            loader: 'svg-url-loader',
+            options: {}
+        }
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      },
+    ]
+  }
 };
