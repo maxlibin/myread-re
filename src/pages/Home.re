@@ -1,16 +1,19 @@
 let component = ReasonReact.statelessComponent("Home");
 
-let make = (_children) => {
+let make = (~updatePage, _children) => {
   ...component,
   render: _self =>
     <div className="home">
       <div className="list-books">
         <div className="list-books-title">
-          <h1>{ReasonReact.string("MyReads")}</h1>
-          <p>{ReasonReact.string("Udacity React nanodegree MyReads project")}</p>
-          <a href="/search" className="btn">
-            {ReasonReact.string("Add a book")}
-          </a>
+          <h1>{"MyReads" |> RR.string}</h1>
+          <p>{"Udacity React nanodegree MyReads project" |> RR.string}</p>
+          <div
+            onClick=(updatePage("/search"))
+            className="btn"
+          >
+            {"Add a book" |> RR.string}
+          </div>
         </div>
       </div>
     </div>
