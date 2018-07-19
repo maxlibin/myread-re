@@ -1,1 +1,1 @@
-ReactDOMRe.renderToElementWithId(<App greeting="Hello!" />, "root");
+ReactDOMRe.renderToElementWithId(<App />, "root");

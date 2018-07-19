@@ -3,11 +3,8 @@
 
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Home$ReactTemplate = require("./pages/Home.bs.js");
 
-((require('./App.css')));
-
-var component = ReasonReact.statelessComponent("App");
+var component = ReasonReact.statelessComponent("Home");
 
 function make() {
   return /* record */[
@@ -22,8 +19,15 @@ function make() {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
               return React.createElement("div", {
-                          className: "app"
-                        }, ReasonReact.element(undefined, undefined, Home$ReactTemplate.make(/* array */[])));
+                          className: "home"
+                        }, React.createElement("div", {
+                              className: "list-books"
+                            }, React.createElement("div", {
+                                  className: "list-books-title"
+                                }, React.createElement("h1", undefined, "MyReads"), React.createElement("p", undefined, "Udacity React nanodegree MyReads project"), React.createElement("a", {
+                                      className: "btn",
+                                      href: "/search"
+                                    }, "Add a book"))));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
@@ -35,4 +39,4 @@ function make() {
 
 exports.component = component;
 exports.make = make;
-/*  Not a pure module */
+/* component Not a pure module */
