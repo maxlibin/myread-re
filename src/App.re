@@ -33,7 +33,7 @@ let make = (_children) => {
     <div className="app">
       (
         switch(state.route) {
-        | Home => <Home updatePage=(() => self.send(UpdatePage)) />
+        | Home => <Home />
         | _ =>
           <div>
             ("Not found" |> RR.string)

@@ -1,6 +1,6 @@
 let component = ReasonReact.statelessComponent("Home");
 
-let make = (~updatePage, _children) => {
+let make = (~updatePage=?, _children) => {
   ...component,
   render: _self =>
     <div className="home">
@@ -9,7 +9,6 @@ let make = (~updatePage, _children) => {
           <h1>{"MyReads" |> RR.string}</h1>
           <p>{"Udacity React nanodegree MyReads project" |> RR.string}</p>
           <div
-            onClick=(updatePage("/search"))
             className="btn"
           >
             {"Add a book" |> RR.string}
