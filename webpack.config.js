@@ -11,6 +11,13 @@ module.exports = {
     publicPath: outputDir,
     filename: 'Index.js',
   },
+  devServer: {
+    contentBase: path.join(__dirname, 'build'),
+    compress: true,
+    port: 9000,
+    historyApiFallback: true,
+    watchContentBase: true
+  },
   module: {
     rules: [
       {
