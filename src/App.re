@@ -29,11 +29,12 @@ let make = (_children) => {
     };
   },
 
-  render: ({state}) => {
+  render: self => {
     <div className="app">
       (
-        switch(state.route) {
-        | Home => <Home />
+        switch(self.state.route) {
+        | Home => <Home updatePage=(() => self.send(UpdatePage(Search))) />
+        | Search => <Search updatePage=(() => self.send(UpdatePage(Home))) />
         | _ =>
           <div>
             ("Not found" |> RR.string)

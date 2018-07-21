@@ -2,10 +2,11 @@
 'use strict';
 
 var Block = require("bs-platform/lib/js/block.js");
+var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var RR$ReactTemplate = require("./RR.bs.js");
 var Home$ReactTemplate = require("./pages/Home.bs.js");
+var Search$ReactTemplate = require("./pages/Search.bs.js");
 
 ((require('./App.css')));
 
@@ -22,11 +23,15 @@ function make() {
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
-          /* render */(function (param) {
-              var match = param[/* state */1][/* route */0];
+          /* render */(function (self) {
+              var match = self[/* state */1][/* route */0];
               return React.createElement("div", {
                           className: "app"
-                        }, match ? React.createElement("div", undefined, RR$ReactTemplate.string("Not found")) : ReasonReact.element(undefined, undefined, Home$ReactTemplate.make(undefined, /* array */[])));
+                        }, match ? ReasonReact.element(undefined, undefined, Search$ReactTemplate.make((function () {
+                                      return Curry._1(self[/* send */3], /* UpdatePage */[/* Home */0]);
+                                    }), /* array */[])) : ReasonReact.element(undefined, undefined, Home$ReactTemplate.make((function () {
+                                      return Curry._1(self[/* send */3], /* UpdatePage */[/* Search */1]);
+                                    }), /* array */[])));
             }),
           /* initialState */(function () {
               return /* record */[/* route : Home */0];
