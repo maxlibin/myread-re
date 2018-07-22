@@ -35,10 +35,6 @@ let make = (_children) => {
         switch(self.state.route) {
         | Home => <Home updatePage=(() => self.send(UpdatePage(Search))) />
         | Search => <Search updatePage=(() => self.send(UpdatePage(Home))) />
-        | _ =>
-          <div>
-            ("Not found" |> RR.string)
-          </div>
         }
       )
     </div>;

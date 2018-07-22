@@ -5,6 +5,9 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var RR$ReactTemplate = require("../RR.bs.js");
+var BooksAPI$ReactTemplate = require("../BooksAPI.bs.js");
+
+console.log(BooksAPI$ReactTemplate.getAll);
 
 var component = ReasonReact.statelessComponent("Home");
 
@@ -41,6 +44,9 @@ function make(updatePage, _) {
         ];
 }
 
+var books = BooksAPI$ReactTemplate.getAll;
+
+exports.books = books;
 exports.component = component;
 exports.make = make;
-/* component Not a pure module */
+/*  Not a pure module */

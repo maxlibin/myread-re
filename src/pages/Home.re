@@ -1,3 +1,7 @@
+let books = BooksAPI.getAll;
+Js.log(books);
+
+
 let component = ReasonReact.statelessComponent("Home");
 
 let make = (~updatePage, _children) => {
