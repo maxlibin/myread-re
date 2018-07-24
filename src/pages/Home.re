@@ -1,11 +1,36 @@
-let books = BooksAPI.getAll;
-Js.log(books);
+type booksList = [];
 
+type state = {
+  books: booksList
+};
 
-let component = ReasonReact.statelessComponent("Home");
+type action = 
+  | Books(booksList);
+
+let component = ReasonReact.reducerComponent("Home");
 
 let make = (~updatePage, _children) => {
   ...component,
+
+  didMount: self => {
+    BooksAPI.getAll
+    |. Js.Promise.then_(result =>
+      self.send(Books(result))
+    )
+  },
+
+  initialState: () => {
+    books: [],
+  },
+
+  reducer: (action, state)=> {
+    switch action {
+    | Books(books) => ReasonReact.Update({
+        books: books
+      })
+    };
+  },
+
   render: _self =>
     <div className="home">
       <div className="list-books">
