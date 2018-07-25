@@ -5,13 +5,15 @@ var Fetch = require("bs-fetch/src/Fetch.js");
 
 var api = "https://reactnd-books-api.udacity.com";
 
-var getAll = fetch("https://reactnd-books-api.udacity.com/books", Fetch.RequestInit[/* make */0](/* Get */0, {
-              Accept: "application/json",
-              Authorization: "myreadrelocal123123"
-            }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0)).then((function (prim) {
-        return prim.json();
-      }));
+function getAll() {
+  return fetch("https://reactnd-books-api.udacity.com/books", Fetch.RequestInit[/* make */0](/* Get */0, {
+                      Accept: "application/json",
+                      Authorization: "myreadrelocal123123"
+                    }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0)).then((function (prim) {
+                return prim.json();
+              }));
+}
 
 exports.api = api;
 exports.getAll = getAll;
-/* getAll Not a pure module */
+/* No side effect */

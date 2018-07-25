@@ -1,11 +1,13 @@
-type booksList = [];
+type booksList = {
+  
+};
 
 type state = {
-  books: booksList
+  books: list(booksList)
 };
 
 type action = 
-  | Books(booksList);
+  | Books(list(books));
 
 let component = ReasonReact.reducerComponent("Home");
 
@@ -13,10 +15,17 @@ let make = (~updatePage, _children) => {
   ...component,
 
   didMount: self => {
-    BooksAPI.getAll
-    |. Js.Promise.then_(result =>
-      self.send(Books(result))
+    Js.Promise.(
+      BooksAPI.getAll()
+      |> then_(result =>
+        resolve(self.send(Books(result)))
+      )
+      |> ignore
     )
+  },
+
+  willReceiveProps: self => {
+    Js.log(self.state)
   },
 
   initialState: () => {

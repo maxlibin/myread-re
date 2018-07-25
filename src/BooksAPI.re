@@ -1,7 +1,8 @@
 
 let api = "https://reactnd-books-api.udacity.com";
 
-let getAll = Js.Promise.(
+let getAll = () => 
+  Js.Promise.(
     Fetch.fetchWithInit(
       api ++ "/books",
       Fetch.RequestInit.make(
@@ -13,5 +14,5 @@ let getAll = Js.Promise.(
         ()
       )
     )
-    |> then_(Fetch.Response.json |> resolve)
-);
+    |> then_(Fetch.Response.json)
+  );
