@@ -1,4 +1,4 @@
-
+/* 
 let api = "https://reactnd-books-api.udacity.com";
 
 let getAll = () => 
@@ -14,5 +14,5 @@ let getAll = () =>
         ()
       )
     )
-    |> then_(Fetch.Response.json)
-  );
+    |> then_(Fetch.Response.json |> resolve)
+  ); */
