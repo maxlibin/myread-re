@@ -30,10 +30,7 @@ let make = (~updatePage, _children) => {
     books: None,
   },
 
-  didMount: self => {
-    self.send(FetchBooks);
-    ();
-  },
+  didMount: self => self.send(FetchBooks),
   reducer: (action, state) =>
     switch action {
     | UpdateBooks(books) =>
@@ -48,10 +45,10 @@ let make = (~updatePage, _children) => {
               fetchWithHeader
               |> then_(Fetch.Response.json)
               |> then_(item => {
-                  self.send(UpdateBooks(Obj.magic(item)));
-                  Js.Promise.resolve();
+                  item |> item => self.send(UpdateBooks(Obj.magic(item))) |> resolve;
                 })
-            ) |> ignore;
+              |> ignore
+            );
           })
         );
     },

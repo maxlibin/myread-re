@@ -26,8 +26,7 @@ function make(updatePage, _) {
           /* handedOffState */component[/* handedOffState */2],
           /* willReceiveProps */component[/* willReceiveProps */3],
           /* didMount */(function (self) {
-              Curry._1(self[/* send */3], /* FetchBooks */0);
-              return /* () */0;
+              return Curry._1(self[/* send */3], /* FetchBooks */0);
             }),
           /* didUpdate */component[/* didUpdate */5],
           /* willUnmount */component[/* willUnmount */6],
@@ -69,8 +68,7 @@ function make(updatePage, _) {
                               fetchWithHeader.then((function (prim) {
                                         return prim.json();
                                       })).then((function (item) {
-                                      Curry._1(self[/* send */3], /* UpdateBooks */[item]);
-                                      return Promise.resolve(/* () */0);
+                                      return Promise.resolve(Curry._1(self[/* send */3], /* UpdateBooks */[item]));
                                     }));
                               return /* () */0;
                             })
