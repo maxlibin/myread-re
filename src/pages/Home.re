@@ -48,7 +48,6 @@ let make = (~updatePage, _children) => {
               fetchWithHeader
               |> then_(Fetch.Response.json)
               |> then_(item => {
-                  let res = Js.Json.(item);
                   self.send(UpdateBooks(Obj.magic(item)));
                   Js.Promise.resolve();
                 })
@@ -57,39 +56,12 @@ let make = (~updatePage, _children) => {
         );
     },
   render: self => {
-    let booksComponent = book => {
-      <li>
-        <div className="book">
-          <div className="book-top">
-            <div className="book-cover"></div>
-            <div className="book-shelf-changer">
-            </div>
-          </div>
-          <div className="book-title">{book##title}</div>
-          <div className="book-authors">
-            {book##author}
-          </div>
-        </div>
-      </li>;
-    }
-    
     let booksContent = switch(self.state.books) {
     | None => ReasonReact.null
     | Some(items) => {
         /* let books = Obj.magic(items)##books; */
         let books = Obj.magic(items)##books;
-        <div className="list-books-content">
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">
-              <span>("books" |. ReasonReact.string)</span>
-            </h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {booksComponent |. Array.map(books) |. ReasonReact.array}
-              </ol>
-            </div>
-          </div>
-        </div>
+        <BookContent books />
       }
     };
 
