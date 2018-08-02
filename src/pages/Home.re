@@ -1,3 +1,5 @@
+open Const;
+
 type bookList
 type state = {
   books: option(bookList)
@@ -31,6 +33,7 @@ let make = (~updatePage, _children) => {
   },
 
   didMount: self => self.send(FetchBooks),
+
   reducer: (action, state) =>
     switch action {
     | UpdateBooks(books) =>
@@ -75,7 +78,24 @@ let make = (~updatePage, _children) => {
           </button>
         </div>
       </div>
-      {booksContent}
+
+      <div className="list-books-content">
+        {
+          let bookshelfs = shelfs => {
+            <Bookshelf
+              key=shelfs.key
+              title=shelfs.title
+              books=self.state.books
+            />
+          };
+
+          Const.bookshelfs
+          |> List.map(bookshelfs)
+          |> Array.of_list
+          |> ReasonReact.array
+        }
+        {booksContent}
+      </div>
     </div>
   }
 }
