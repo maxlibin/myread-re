@@ -7,12 +7,11 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var Fetch = require("bs-fetch/src/Fetch.js");
 var React = require("react");
+var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var RR$ReactTemplate = require("../RR.bs.js");
 var Const$ReactTemplate = require("../const/Const.bs.js");
 var Bookshelf$ReactTemplate = require("../components/Bookshelf.bs.js");
-var BookContent$ReactTemplate = require("../components/BookContent.bs.js");
 
 var api = "https://reactnd-books-api.udacity.com";
 
@@ -20,6 +19,14 @@ var fetchWithHeader = fetch("https://reactnd-books-api.udacity.com/books", Fetch
             Accept: "application/json",
             Authorization: "myreadrelocal123123"
           }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0));
+
+function books(books$1) {
+  return Json_decode.field("books", (function (param) {
+                return Json_decode.array(Const$ReactTemplate.booktypes, param);
+              }), books$1);
+}
+
+var Decode = /* module */[/* books */books];
 
 var component = ReasonReact.reducerComponent("Home");
 
@@ -37,39 +44,41 @@ function make(updatePage, _) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              var match = self[/* state */1][/* books */0];
-              var booksContent;
-              if (match !== undefined) {
-                var books = Js_primitive.valFromOption(match).books;
-                booksContent = ReasonReact.element(undefined, undefined, BookContent$ReactTemplate.make(books, /* array */[]));
+              var match = self[/* state */1];
+              if (match) {
+                var books = match[0];
+                var bookshelfsComponent = function (shelfs) {
+                  return ReasonReact.element(shelfs[/* key */1], undefined, Bookshelf$ReactTemplate.make(shelfs[/* title */0], shelfs[/* key */1], books, /* array */[]));
+                };
+                return React.createElement("div", {
+                            className: "home"
+                          }, React.createElement("div", {
+                                className: "list-books"
+                              }, React.createElement("div", {
+                                    className: "list-books-title"
+                                  }, React.createElement("h1", undefined, RR$ReactTemplate.string("MyReads")), React.createElement("p", undefined, RR$ReactTemplate.string("Udacity React nanodegree MyReads project")), React.createElement("button", {
+                                        className: "btn",
+                                        onClick: (function () {
+                                            return Curry._1(updatePage, /* () */0);
+                                          })
+                                      }, RR$ReactTemplate.string("Add a book")))), React.createElement("div", {
+                                className: "list-books-content"
+                              }, $$Array.of_list(List.map(bookshelfsComponent, Const$ReactTemplate.bookshelfs))));
               } else {
-                booksContent = null;
+                return React.createElement("div", {
+                            className: "bookshelfLoading"
+                          }, React.createElement("span", {
+                                className: "loader"
+                              }), RR$ReactTemplate.string("Loading..."));
               }
-              var bookshelfs = function (shelfs) {
-                return ReasonReact.element(shelfs[/* key */1], undefined, Bookshelf$ReactTemplate.make(shelfs[/* title */0], self[/* state */1][/* books */0], /* array */[]));
-              };
-              return React.createElement("div", {
-                          className: "home"
-                        }, React.createElement("div", {
-                              className: "list-books"
-                            }, React.createElement("div", {
-                                  className: "list-books-title"
-                                }, React.createElement("h1", undefined, RR$ReactTemplate.string("MyReads")), React.createElement("p", undefined, RR$ReactTemplate.string("Udacity React nanodegree MyReads project")), React.createElement("button", {
-                                      className: "btn",
-                                      onClick: (function () {
-                                          return Curry._1(updatePage, /* () */0);
-                                        })
-                                    }, RR$ReactTemplate.string("Add a book")))), React.createElement("div", {
-                              className: "list-books-content"
-                            }, $$Array.of_list(List.map(bookshelfs, Const$ReactTemplate.bookshelfs)), booksContent));
             }),
           /* initialState */(function () {
-              return /* record */[/* books */undefined];
+              return /* Loading */0;
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, state) {
               if (action) {
-                return /* Update */Block.__(0, [/* record */[/* books */Js_primitive.some(action[0])]]);
+                return /* Update */Block.__(0, [/* Books */[action[0]]]);
               } else {
                 return /* UpdateWithSideEffects */Block.__(2, [
                           state,
@@ -77,7 +86,8 @@ function make(updatePage, _) {
                               fetchWithHeader.then((function (prim) {
                                         return prim.json();
                                       })).then((function (item) {
-                                      return Promise.resolve(Curry._1(self[/* send */3], /* UpdateBooks */[item]));
+                                      var item$1 = books(item);
+                                      return Promise.resolve(Curry._1(self[/* send */3], /* UpdateBooks */[item$1]));
                                     }));
                               return /* () */0;
                             })
@@ -91,6 +101,7 @@ function make(updatePage, _) {
 
 exports.api = api;
 exports.fetchWithHeader = fetchWithHeader;
+exports.Decode = Decode;
 exports.component = component;
 exports.make = make;
 /* fetchWithHeader Not a pure module */

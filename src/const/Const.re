@@ -11,54 +11,77 @@ let bookshelfs = [
   { title: "Read", key: "read" },
 ];
 
-[@bs.deriving abstract]
 type imageLinks = {
   smallThumbnail: string,
   thumbnail: int,
 };
 
-[@bs.deriving abstract]
 type industryIdentifiers = {
   _type: string,
   identifier: string
 };
 
-[@bs.deriving abstract]
 type panelizationSummary = {
   containsEpubBubbles: bool,
   containsImageBubbles: bool
 };
 
-[@bs.deriving abstract]
 type ratingsCount = {
   image: bool,
   text: bool
 };
 
-[@bs.deriving abstract]
-type books = {
-  [@bs.optional] allowAnonLogging: bool,
-  [@bs.optional] authors: list(string),
-  [@bs.optional] averageRating: int,
-  [@bs.optional] canonicalVolumeLink: string,
-  [@bs.optional] categories: list(string),
-  [@bs.optional] contentVersion: string,
-  [@bs.optional] description: string,
-  [@bs.optional] id: string,
-  [@bs.optional] imageLinks: imageLinks,
-  [@bs.optional] industryIdentifiers: list(industryIdentifiers),
-  [@bs.optional] infoLink: string,
-  [@bs.optional] language: string,
-  [@bs.optional] maturityRating: string,
-  [@bs.optional] pageCount: int,
-  [@bs.optional] panelizationSummary: panelizationSummary,
-  [@bs.optional] previewLink: string,
-  [@bs.optional] printType: string,
-  [@bs.optional] publishedDate: string,
-  [@bs.optional] publisher: string,
-  [@bs.optional] ratingsCount: ratingsCount,
-  [@bs.optional] readingModes: string,
-  [@bs.optional] shelf: string,
-  [@bs.optional] subtitle: string,
-  [@bs.optional] title: string
+type booksType = {
+  allowAnonLogging: bool,
+  authors: list(string),
+  /* averageRating: int, */
+  canonicalVolumeLink: string,
+  categories: option(list(string)),
+  contentVersion: string,
+  description: string,
+  id: string,
+  /* imageLinks: imageLinks, */
+  /* industryIdentifiers: list(industryIdentifiers), */
+  infoLink: string,
+  language: string,
+  maturityRating: string,
+  pageCount: int,
+  /* panelizationSummary: panelizationSummary, */
+  previewLink: string,
+  printType: string,
+  publishedDate: string,
+  /* publisher: string, */
+  /* ratingsCount: ratingsCount, */
+  /* readingModes: string, */
+  shelf: string,
+  /* subtitle: string, */
+  title: string
 };
+
+let booktypes = json =>
+  Json.Decode.{
+    allowAnonLogging: json |> field("allowAnonLogging", bool),
+    authors: json |> field("authors", list(string)),
+    /* averageRating: json |> field("averageRating", int), */
+    canonicalVolumeLink: json |> field("canonicalVolumeLink", string),
+    categories: json |> optional(field("categories", list(string))),
+    contentVersion: json |> field("contentVersion", string),
+    description: json |> field("description", string),
+    id: json |> field("id", string),
+    /* imageLinks: json |> field("id", string), */
+    /* industryIdentifiers: list(industryIdentifiers), */
+    infoLink: json |> field("infoLink", string),
+    language: json |> field("language", string),
+    maturityRating: json |> field("maturityRating", string),
+    pageCount: json |> field("pageCount", int),
+    /* panelizationSummary: panelizationSummary, */
+    previewLink: json |> field("previewLink", string),
+    printType: json |> field("printType", string),
+    publishedDate: json |> field("publishedDate", string),
+    /* publisher: json |> field("publisher", string), */
+    /* ratingsCount: ratingsCount, */
+    /* readingModes: json |> field("readingModes", string), */
+    shelf: json |> field("shelf", string),
+    /* subtitle: json |> field("subtitle", string), */
+    title: json |> field("title", string),
+  };
