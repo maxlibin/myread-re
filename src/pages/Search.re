@@ -4,12 +4,12 @@ let make = (~updatePage, _children) => {
   ...component,
   render: (_self) =>
     <div>
-      <button
+      <a
+        href="/"
         className="btn"
-        onClick=(_event => updatePage())
       >
         ("back" |. RR.string)
-      </button>
+      </a>
       <p>
         ("Search" |. RR.string)
       </p>
