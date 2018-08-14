@@ -13,7 +13,7 @@ let bookshelfs = [
 
 type imageLinks = {
   smallThumbnail: string,
-  thumbnail: int,
+  thumbnail: string,
 };
 
 type industryIdentifiers = {
@@ -40,7 +40,7 @@ type booksType = {
   contentVersion: string,
   description: string,
   id: string,
-  /* imageLinks: imageLinks, */
+  imageLinks: imageLinks,
   /* industryIdentifiers: list(industryIdentifiers), */
   infoLink: string,
   language: string,
@@ -58,6 +58,14 @@ type booksType = {
   title: string
 };
 
+let imageLinksJson = json =>
+  Json.Decode.{
+    smallThumbnail: json |> field("smallThumbnail", string),
+    /* smallThumbnail: json |> optional(field("smallThumbnail", string)), */
+    /* thumbnail: json |> optional(field("smallThumbnail", string)), */
+    thumbnail: json |> field("smallThumbnail", string),
+  };
+
 let booktypes = json =>
   Json.Decode.{
     allowAnonLogging: json |> field("allowAnonLogging", bool),
@@ -68,7 +76,7 @@ let booktypes = json =>
     contentVersion: json |> field("contentVersion", string),
     description: json |> field("description", string),
     id: json |> field("id", string),
-    /* imageLinks: json |> field("id", string), */
+    imageLinks: json |> field("imageLinks", imageLinksJson),
     /* industryIdentifiers: list(industryIdentifiers), */
     infoLink: json |> field("infoLink", string),
     language: json |> field("language", string),

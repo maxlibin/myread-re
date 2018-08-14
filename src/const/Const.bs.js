@@ -3,6 +3,13 @@
 
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 
+function imageLinksJson(json) {
+  return /* record */[
+          /* smallThumbnail */Json_decode.field("smallThumbnail", Json_decode.string, json),
+          /* thumbnail */Json_decode.field("smallThumbnail", Json_decode.string, json)
+        ];
+}
+
 function booktypes(json) {
   return /* record */[
           /* allowAnonLogging */Json_decode.field("allowAnonLogging", Json_decode.bool, json),
@@ -18,6 +25,7 @@ function booktypes(json) {
           /* contentVersion */Json_decode.field("contentVersion", Json_decode.string, json),
           /* description */Json_decode.field("description", Json_decode.string, json),
           /* id */Json_decode.field("id", Json_decode.string, json),
+          /* imageLinks */Json_decode.field("imageLinks", imageLinksJson, json),
           /* infoLink */Json_decode.field("infoLink", Json_decode.string, json),
           /* language */Json_decode.field("language", Json_decode.string, json),
           /* maturityRating */Json_decode.field("maturityRating", Json_decode.string, json),
@@ -51,5 +59,6 @@ var bookshelfs = /* :: */[
 ];
 
 exports.bookshelfs = bookshelfs;
+exports.imageLinksJson = imageLinksJson;
 exports.booktypes = booktypes;
 /* No side effect */

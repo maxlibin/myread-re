@@ -9,7 +9,9 @@ let make = (~title:string="", ~shelf:string="", ~books, _children) => {
       book => book.shelf == shelf
     );
 
-    Js.log(books);
+     /* backgroundImage: `url(${imageLinks && imageLinks.smallThumbnail})` */
+
+    let style = ReactDOMRe.Style.make(~width="128", ~height="193", ());
     
     <div className="bookshelf">
       <h2 className="bookshelf-title">
@@ -19,13 +21,14 @@ let make = (~title:string="", ~shelf:string="", ~books, _children) => {
       </h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
-          <div className="book">
-            <div className="book-top">
-              /* <div className="book-cover" style=style></div> */
-              <div className="book-shelf-changer">
-              </div>
-            </div>
-          </div>
+          {
+            books
+            |> List.map(
+              book => <BookList key=book.title book />
+            )
+            |> Array.of_list
+            |> ReasonReact.array
+          }
         </ol>
       </div>
     </div>
