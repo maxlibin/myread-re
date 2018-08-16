@@ -19,10 +19,16 @@ function make(_, _$1) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              return React.createElement("div", undefined, React.createElement("a", {
-                              className: "btn",
-                              href: "/"
-                            }, RR$ReactTemplate.string("back")), React.createElement("p", undefined, RR$ReactTemplate.string("Search")));
+              return React.createElement("div", {
+                          className: "search-books"
+                        }, React.createElement("div", {
+                              className: "search-books-bar"
+                            }, React.createElement("a", {
+                                  className: "close-search",
+                                  href: "/"
+                                }, RR$ReactTemplate.string("Close"))), React.createElement("div", {
+                              className: "search-books-results"
+                            }, React.createElement("p", undefined, RR$ReactTemplate.string("Enter something in above search box and press enter to search for your favorite books"))));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

@@ -3,15 +3,17 @@ let component = ReasonReact.statelessComponent("Search");
 let make = (~updatePage, _children) => {
   ...component,
   render: (_self) =>
-    <div>
-      <a
-        href="/"
-        className="btn"
-      >
-        ("back" |. RR.string)
-      </a>
-      <p>
-        ("Search" |. RR.string)
-      </p>
+    <div className="search-books">
+      <div className="search-books-bar">
+        <a
+          href="/"
+          className="close-search"
+        >
+          ("Close" |. RR.string)
+        </a>
+      </div>
+      <div className="search-books-results">
+        <p>{"Enter something in above search box and press enter to search for your favorite books" |> RR.string}</p>
+      </div>
     </div>
 }
