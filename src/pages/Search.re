@@ -11,6 +11,11 @@ let make = (~updatePage, _children) => {
         >
           ("Close" |. RR.string)
         </a>
+        <input
+          name="searchQuery"
+          type_="text"
+          placeholder="Search by title or author"
+        />
       </div>
       <div className="search-books-results">
         <p>{"Enter something in above search box and press enter to search for your favorite books" |> RR.string}</p>

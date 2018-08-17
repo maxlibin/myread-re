@@ -26,7 +26,11 @@ function make(_, _$1) {
                             }, React.createElement("a", {
                                   className: "close-search",
                                   href: "/"
-                                }, RR$ReactTemplate.string("Close"))), React.createElement("div", {
+                                }, RR$ReactTemplate.string("Close")), React.createElement("input", {
+                                  name: "searchQuery",
+                                  placeholder: "Search by title or author",
+                                  type: "text"
+                                })), React.createElement("div", {
                               className: "search-books-results"
                             }, React.createElement("p", undefined, RR$ReactTemplate.string("Enter something in above search box and press enter to search for your favorite books"))));
             }),
