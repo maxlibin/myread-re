@@ -1,8 +1,10 @@
 let component = ReasonReact.statelessComponent("Search");
 
 let make = (~updatePage, _children) => {
-  let handleOnKeydown = (e) => {
-    let target = ReactEventRe.Keyboard.target(e);
+  let handleOnKeyUp = (e) => {
+    let target = ReactEvent.Keyboard.target(e);
+
+    Js.log(target##value);
   };
 
   {
@@ -20,7 +22,7 @@ let make = (~updatePage, _children) => {
             name="searchQuery"
             type_="text"
             placeholder="Search by title or author"
-            onKeyDown=handleOnKeydown
+            onKeyUp=handleOnKeyUp
           />
         </div>
         <div className="search-books-results">
