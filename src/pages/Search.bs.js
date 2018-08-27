@@ -19,11 +19,12 @@ function books(books$1) {
 
 var Decode = /* module */[/* books */books];
 
-function fetchWithHeader(payload) {
+function fetchWithHeader(body) {
   return fetch(Const$ReactTemplate.api + "/search", Fetch.RequestInit[/* make */0](/* Post */2, {
                     Accept: "application/json",
-                    Authorization: "myreadrelocal123123"
-                  }, Js_primitive.some(JSON.stringify(payload)), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0));
+                    Authorization: "myreadrelocal123123",
+                    "Content-Type": "application/json"
+                  }, Js_primitive.some(JSON.stringify(body)), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0));
 }
 
 var component = ReasonReact.reducerComponent("Search");
@@ -40,7 +41,8 @@ function make(_, _$1) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              console.log(self[/* state */1][/* books */0]);
+              console.log(self[/* state */1]);
+              var match = self[/* state */1];
               return React.createElement("div", {
                           className: "search-books"
                         }, React.createElement("div", {
@@ -59,21 +61,28 @@ function make(_, _$1) {
                                         })
                                     }))), React.createElement("div", {
                               className: "search-books-results"
-                            }, React.createElement("p", undefined, RR$ReactTemplate.string("Enter something in above search box and press enter to search for your favorite books"))));
+                            }, match ? (console.log(match[0]), React.createElement("p", undefined, RR$ReactTemplate.string("favorite books"))) : React.createElement("p", undefined, RR$ReactTemplate.string("Enter something in above search box and press enter to search for your favorite books"))));
             }),
           /* initialState */(function () {
-              return /* record */[/* books : array */[]];
+              return /* Loading */0;
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, _) {
               if (action.tag) {
                 var value = action[0];
                 return /* SideEffects */Block.__(1, [(function () {
-                              console.log(value);
+                              var body = { };
+                              body["query"] = value;
+                              fetchWithHeader(body).then((function (prim) {
+                                        return prim.json();
+                                      })).then((function (item) {
+                                      var item$1 = books(item);
+                                      return Promise.resolve((console.log(item$1), /* () */0));
+                                    }));
                               return /* () */0;
                             })]);
               } else {
-                return /* Update */Block.__(0, [/* record */[/* books */action[0]]]);
+                return /* Update */Block.__(0, [/* Books */[action[0]]]);
               }
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]

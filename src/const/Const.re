@@ -38,14 +38,14 @@ type booksType = {
   canonicalVolumeLink: string,
   categories: option(list(string)),
   contentVersion: string,
-  description: string,
+  description: option(string),
   id: string,
   imageLinks: imageLinks,
   /* industryIdentifiers: list(industryIdentifiers), */
   infoLink: string,
   language: string,
   maturityRating: string,
-  pageCount: int,
+  pageCount: option(int),
   /* panelizationSummary: panelizationSummary, */
   previewLink: string,
   printType: string,
@@ -53,7 +53,7 @@ type booksType = {
   /* publisher: string, */
   /* ratingsCount: ratingsCount, */
   /* readingModes: string, */
-  shelf: string,
+  shelf: option(string),
   /* subtitle: string, */
   title: string
 };
@@ -74,14 +74,14 @@ let booktypes = json =>
     canonicalVolumeLink: json |> field("canonicalVolumeLink", string),
     categories: json |> optional(field("categories", list(string))),
     contentVersion: json |> field("contentVersion", string),
-    description: json |> field("description", string),
+    description: json |> optional(field("description", string)),
     id: json |> field("id", string),
     imageLinks: json |> field("imageLinks", imageLinksJson),
     /* industryIdentifiers: list(industryIdentifiers), */
     infoLink: json |> field("infoLink", string),
     language: json |> field("language", string),
     maturityRating: json |> field("maturityRating", string),
-    pageCount: json |> field("pageCount", int),
+    pageCount: json |> optional(field("pageCount", int)),
     /* panelizationSummary: panelizationSummary, */
     previewLink: json |> field("previewLink", string),
     printType: json |> field("printType", string),
@@ -89,7 +89,7 @@ let booktypes = json =>
     /* publisher: json |> field("publisher", string), */
     /* ratingsCount: ratingsCount, */
     /* readingModes: json |> field("readingModes", string), */
-    shelf: json |> field("shelf", string),
+    shelf: json |> optional(field("shelf", string)),
     /* subtitle: json |> field("subtitle", string), */
     title: json |> field("title", string),
   };

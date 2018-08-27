@@ -23,17 +23,23 @@ function booktypes(json) {
                               }), param);
                 }), json),
           /* contentVersion */Json_decode.field("contentVersion", Json_decode.string, json),
-          /* description */Json_decode.field("description", Json_decode.string, json),
+          /* description */Json_decode.optional((function (param) {
+                  return Json_decode.field("description", Json_decode.string, param);
+                }), json),
           /* id */Json_decode.field("id", Json_decode.string, json),
           /* imageLinks */Json_decode.field("imageLinks", imageLinksJson, json),
           /* infoLink */Json_decode.field("infoLink", Json_decode.string, json),
           /* language */Json_decode.field("language", Json_decode.string, json),
           /* maturityRating */Json_decode.field("maturityRating", Json_decode.string, json),
-          /* pageCount */Json_decode.field("pageCount", Json_decode.$$int, json),
+          /* pageCount */Json_decode.optional((function (param) {
+                  return Json_decode.field("pageCount", Json_decode.$$int, param);
+                }), json),
           /* previewLink */Json_decode.field("previewLink", Json_decode.string, json),
           /* printType */Json_decode.field("printType", Json_decode.string, json),
           /* publishedDate */Json_decode.field("publishedDate", Json_decode.string, json),
-          /* shelf */Json_decode.field("shelf", Json_decode.string, json),
+          /* shelf */Json_decode.optional((function (param) {
+                  return Json_decode.field("shelf", Json_decode.string, param);
+                }), json),
           /* title */Json_decode.field("title", Json_decode.string, json)
         ];
 }
