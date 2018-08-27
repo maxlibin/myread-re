@@ -93,3 +93,5 @@ let booktypes = json =>
     /* subtitle: json |> field("subtitle", string), */
     title: json |> field("title", string),
   };
+
+let api = "https://reactnd-books-api.udacity.com";

@@ -5,9 +5,6 @@ let component = ReasonReact.statelessComponent("BookList");
 let make = (~book, _children) => {
   ...component,
   render: (_self) => {
-     /* backgroundImage: `url(${imageLinks && imageLinks.smallThumbnail})` */
-
-
     let style = ReactDOMRe.Style.make(~width="128px", ~height="193px", ~backgroundImage="url("++book.imageLinks.smallThumbnail++")", ());
 
     <li>

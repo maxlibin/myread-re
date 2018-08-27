@@ -5,8 +5,6 @@ type state =
   | Loading
   | Books(array(booksType));
 
-let api = "https://reactnd-books-api.udacity.com";
-
 let fetchWithHeader = Fetch.fetchWithInit(
   api ++ "/books",
   Fetch.RequestInit.make(

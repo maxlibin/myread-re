@@ -13,9 +13,7 @@ var RR$ReactTemplate = require("../RR.bs.js");
 var Const$ReactTemplate = require("../const/Const.bs.js");
 var Bookshelf$ReactTemplate = require("../components/Bookshelf.bs.js");
 
-var api = "https://reactnd-books-api.udacity.com";
-
-var fetchWithHeader = fetch("https://reactnd-books-api.udacity.com/books", Fetch.RequestInit[/* make */0](/* Get */0, {
+var fetchWithHeader = fetch(Const$ReactTemplate.api + "/books", Fetch.RequestInit[/* make */0](/* Get */0, {
             Accept: "application/json",
             Authorization: "myreadrelocal123123"
           }, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* () */0));
@@ -98,7 +96,6 @@ function make(updatePage, _) {
         ];
 }
 
-exports.api = api;
 exports.fetchWithHeader = fetchWithHeader;
 exports.Decode = Decode;
 exports.component = component;

@@ -58,7 +58,10 @@ var bookshelfs = /* :: */[
   ]
 ];
 
+var api = "https://reactnd-books-api.udacity.com";
+
 exports.bookshelfs = bookshelfs;
 exports.imageLinksJson = imageLinksJson;
 exports.booktypes = booktypes;
+exports.api = api;
 /* No side effect */
