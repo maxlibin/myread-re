@@ -31,9 +31,19 @@ type ratingsCount = {
   text: bool
 };
 
-type booksType = {
+
+let imageLinksJson = json =>
+  Json.Decode.{
+    smallThumbnail: json |> field("smallThumbnail", string),
+    /* smallThumbnail: json |> optional(field("smallThumbnail", string)), */
+    /* thumbnail: json |> optional(field("smallThumbnail", string)), */
+    thumbnail: json |> field("smallThumbnail", string),
+  };
+
+
+type booksTypeSearch = {
   allowAnonLogging: bool,
-  authors: list(string),
+  authors: option(list(string)),
   /* averageRating: int, */
   canonicalVolumeLink: string,
   categories: option(list(string)),
@@ -53,23 +63,16 @@ type booksType = {
   /* publisher: string, */
   /* ratingsCount: ratingsCount, */
   /* readingModes: string, */
-  shelf: string,
+  shelf: option(string),
   /* subtitle: string, */
   title: string
 };
 
-let imageLinksJson = json =>
-  Json.Decode.{
-    smallThumbnail: json |> field("smallThumbnail", string),
-    /* smallThumbnail: json |> optional(field("smallThumbnail", string)), */
-    /* thumbnail: json |> optional(field("smallThumbnail", string)), */
-    thumbnail: json |> field("smallThumbnail", string),
-  };
 
-let booktypes = json =>
+let booktypesSearch = json =>
   Json.Decode.{
     allowAnonLogging: json |> field("allowAnonLogging", bool),
-    authors: json |> field("authors", list(string)),
+    authors: json |> optional(field("authors", list(string))),
     /* averageRating: json |> field("averageRating", int), */
     canonicalVolumeLink: json |> field("canonicalVolumeLink", string),
     categories: json |> optional(field("categories", list(string))),
@@ -89,7 +92,7 @@ let booktypes = json =>
     /* publisher: json |> field("publisher", string), */
     /* ratingsCount: ratingsCount, */
     /* readingModes: json |> field("readingModes", string), */
-    shelf: json |> field("shelf", string),
+    shelf: json |> optional(field("shelf", string)),
     /* subtitle: json |> field("subtitle", string), */
     title: json |> field("title", string),
   };

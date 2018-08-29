@@ -1,17 +1,17 @@
-open Const;
+open BookTypeSearch;
 
 type state =
   | Loading
-  | Books(array(booksType));
+  | Books(array(booksTypeSearch));
 
 type action =
-  | UpdateBooks(array(booksType))
+  | UpdateBooks(array(booksTypeSearch))
   | FetchBooks(string);
 
 module Decode = {
   let books = books =>
     Json.Decode.(
-      books |> field("books", array(booktypes))
+      books |> field("books", array(booktypesSearch))
     );
 };
 
@@ -49,7 +49,7 @@ let make = (~updatePage, _children) => {
             |> then_(item =>
               item
               |> Decode.books
-              |> item => Js.log(item) |> resolve
+              |> item => self.send(UpdateBooks(item)) |> resolve
             )
             |> ignore
           )
@@ -59,7 +59,6 @@ let make = (~updatePage, _children) => {
       };
     },
     render: (self) => {
-      Js.log(self.state);
       {
         <div className="search-books">
           <div className="search-books-bar">
@@ -84,9 +83,49 @@ let make = (~updatePage, _children) => {
               switch self.state {
               | Loading =>
                 <p>{"Enter something in above search box and press enter to search for your favorite books" |> RR.string}</p>
-              | Books(books) => {
-                Js.log(books);
-                <p>{"favorite books" |> RR.string}</p>
+              | Books(booksSerach) => {
+                <ol className="books-grid">
+                  {
+                    booksSerach
+                    |> Array.map(
+                      book => {
+                        let style = ReactDOMRe.Style.make(~width="128px", ~height="193px", ~backgroundImage="url("++book.imageLinks.smallThumbnail++")", ());
+                        <li key=(book.id)>
+                          <div className="book">
+                            <div className="book-top">
+                              <div className="book-cover" style=style></div>
+                              <div className="book-shelf-changer">
+                                /* <Select
+                                  onChange={this.handleOnChange}
+                                  currentValue={shelf ? shelf : "none"}
+                                /> */
+                              </div>
+                            </div>
+                            <div className="book-title">
+                              {book.title |> RR.string}
+                            </div>
+                            <div className="book-authors">
+                            {
+                              switch (book.authors) {
+                              | None => ReasonReact.null
+                              | Some(authors) =>
+                                authors
+                                |> List.map(
+                                  author => <span key=author>{author |> RR.string}</span>
+                                )
+                                |> Array.of_list
+                                |> ReasonReact.array
+                              };
+                              
+                            }
+                            </div>
+                          </div>
+                        </li>
+                      }
+                    )
+                    |> ReasonReact.array
+                  }
+                </ol>
               }
               };
             }
